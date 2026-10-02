@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فريق التدقيق الداخلي - الجامعة الدولية الليبية</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        limu: {
+                            navy: '#0e2a47',
+                            blue: '#1b4965',
+                            lightBlue: '#62b6cb',
+                            sky: '#bee9e8',
+                            accent: '#0284c7',
+                            gold: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        .slide-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .hex-accent {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+        .glow-effect {
+            box-shadow: 0 0 35px rgba(2, 132, 199, 0.25);
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-mode { background: white !important; color: black !important; }
+            .slide-card { background: white !important; color: black !important; border: 1px solid #ccc !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Navigation Bar -->
+    <header class="no-print bg-limu-navy/90 backdrop-blur-md border-b border-slate-700/60 sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-1.5 rounded-lg shadow-md flex items-center justify-center">
+                    <div class="w-10 h-10 bg-limu-navy text-white flex items-center justify-center font-bold text-xl rounded">
+                        LIMU
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white tracking-wide">الجامعة الدولية الليبية</h1>
+                    <p class="text-xs text-sky-400 font-medium">إدارة الجودة الشاملة - وحدة التدقيق الداخلي</p>
+                </div>
+            </div>
+
+            <!-- View Mode Switcher -->
+            <div class="flex items-center bg-slate-800/90 p-1.5 rounded-xl border border-slate-700">
+                <button onclick="setViewMode('slides')" id="btn-slides" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-limu-accent text-white shadow">
+                    <i class="fa-solid fa-desktop"></i>
+                    <span>عرض الشرائح</span>
+                </button>
+                <button onclick="setViewMode('grid')" id="btn-grid" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-700/50 transition-all">
+                    <i class="fa-solid fa-grip"></i>
+                    <span>دليل الأعضاء</span>
+                </button>
+                <button onclick="resetToDefaults()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-bold text-amber-400 hover:text-amber-300 hover:bg-slate-700/50 transition-all" title="استعادة البيانات الأصلية">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span class="hidden lg:inline">استعادة الأصل</span>
+                </button>
+                <button onclick="window.print()" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-700/50 transition-all">
+                    <i class="fa-solid fa-print"></i>
+                    <span>طباعة / تصدير</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Title Banner -->
+    <section class="bg-gradient-to-r from-slate-900 via-limu-navy to-slate-900 border-b border-sky-900/40 py-6 px-4">
+        <div class="max-w-7xl mx-auto text-center space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-300 text-xs font-semibold mb-1">
+                <i class="fa-solid fa-award"></i>
+                <span>شركاء في التميز الأكاديمي والتحسين المستمر</span>
+            </div>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
+                فريق التدقيق الداخلي: <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">شركاء في التميز الأكاديمي</span>
+            </h2>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto">
+                البطاقات التعريفية المعتمدة لأعضاء فريق التدقيق الداخلي ومسؤولياتهم وفق معايير الجودة الشاملة
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-8">
+
+        <!-- 1. SLIDE PRESENTATION VIEW -->
+        <div id="slides-view" class="space-y-6">
+            
+            <!-- Slide Control Bar -->
+            <div class="no-print flex items-center justify-between bg-slate-800/80 backdrop-blur border border-slate-700/80 px-6 py-3 rounded-2xl shadow-lg">
+                <div class="flex items-center gap-3">
+                    <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-700 hover:bg-sky-600 text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:hover:bg-slate-700" id="btn-prev">
+                        <i class="fa-solid fa-chevron-right text-lg"></i>
+                    </button>
+                    <span class="text-sm font-bold text-slate-300">
+                        الشريحة <span id="current-slide-num" class="text-sky-400 text-base">1</span> من <span id="total-slides-num" class="text-slate-400">10</span>
+                    </span>
+                    <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-700 hover:bg-sky-600 text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:hover:bg-slate-700" id="btn-next">
+                        <i class="fa-solid fa-chevron-left text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Slide Navigation Dots / Quick Switcher -->
+                <div class="hidden lg:flex items-center gap-1.5" id="slide-dots">
+                    <!-- Dots generated via JS -->
+                </div>
+
+                <div class="text-xs text-slate-400 hidden sm:block">
+                    <kbd class="px-2 py-1 bg-slate-900 border border-slate-700 rounded text-sky-400 font-mono">←</kbd>
+                    <kbd class="px-2 py-1 bg-slate-900 border border-slate-700 rounded text-sky-400 font-mono">→</kbd>
+                    للتنقل بالأسهم
+                </div>
+            </div>
+
+            <!-- Main Interactive Slide Frame -->
+            <div id="slide-container" class="relative">
+                <!-- Active Slide Rendered Dynamically -->
+            </div>
+
+        </div>
+
+        <!-- 2. GRID OVERVIEW VIEW (Hidden by default) -->
+        <div id="grid-view" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Grid cards rendered via JS -->
+        </div>
+
+    </main>
+
+    <!-- Edit Member Modal -->
+    <div id="edit-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-5 relative">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-sky-400"></i>
+                    <span>تعديل بيانات عضو الفريق</span>
+                </h3>
+                <button onclick="closeEditModal()" class="text-slate-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="edit-form" onsubmit="saveMemberDetails(event)" class="space-y-4">
+                <input type="hidden" id="edit-member-id">
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">اسم العضو / الصفة العلمية</label>
+                    <input type="text" id="edit-name" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">المسمى الوظيفي في فريق التدقيق</label>
+                    <input type="text" id="edit-role" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">المعيار المكلف به (المسؤولية المعتمدة)</label>
+                    <textarea id="edit-standard" rows="3" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-sky-500 leading-relaxed"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">البريد الإلكتروني الرسمي</label>
+                    <input type="email" id="edit-email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-sky-500 text-left" dir="ltr">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">تصنيف الوسام / Badge</label>
+                    <input type="text" id="edit-badge" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+                    <button type="button" onclick="closeEditModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
+                        إلغاء
+                    </button>
+                    <button type="submit" class="px-5 py-2 rounded-xl text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white transition-all shadow-md">
+                        حفظ التعديلات
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="no-print bg-slate-950 border-t border-slate-800 text-slate-400 py-6 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
+            <p>© 2026 الجامعة الدولية الليبية (LIMU) - إدارة الجودة الشاملة. جميع الحقوق محفوظة.</p>
+            <p class="text-slate-500">تم تطوير نظام العرض التقديمي لفريق التدقيق الداخلي</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Team Members Dataset based on the table image
+        const defaultTeamData = [
+            {
+                id: 1,
+                name: "أ.د. عبد المجيد حسين",
+                role: "مدير إدارة الجودة الشاملة",
+                standard: "الإشراف العام على منظومة التدقيق والجودة الشاملة بالجامعة",
+                email: "abdulmajid.hussein@limu.edu.ly",
+                badge: "قيادة وتخطيط استراتيجي",
+                photo: null
+            },
+            {
+                id: 2,
+                name: "أ.د. رفيق المهدوي",
+                role: "نائب مدير إدارة الجودة الشاملة",
+                standard: "المتابعة والتقييم التنفيذي لعمليات التدقيق والتحسين المستمر",
+                email: "rafeeq.elmahdawi@limu.edu.ly",
+                badge: "إدارة ومتابعة الجودة",
+                photo: null
+            },
+            {
+                id: 3,
+                name: "أ. فتحي الفزاني",
+                role: "رئيس وحدة التدقيق الداخلي",
+                standard: "معيار الحوكمة والفاعلية المؤسسية + معيار التنظيم والفاعلية الإدارية للوحدات التنظيمية",
+                email: "fathi.elfazzani@limu.edu.ly",
+                badge: "حوكمة وتنظيم إداري",
+                photo: null
+            },
+            {
+                id: 4,
+                name: "د. سعاد المصراتي",
+                role: "مدقق داخلي",
+                standard: "معيار شؤون الطلبة وبيئة التعلم",
+                email: "souad.elmisrati@limu.edu.ly",
+                badge: "شؤون الطلاب وبيئة التعلم",
+                photo: null
+            },
+            {
+                id: 5,
+                name: "د. سارة قليصة",
+                role: "مدقق داخلي",
+                standard: "معيار التعليم والتعلم",
+                email: "sara.qlaisa@limu.edu.ly",
+                badge: "التعليم والتعلم",
+                photo: null
+            },
+            {
+                id: 6,
+                name: "د. ندى بن علي",
+                role: "مدقق داخلي",
+                standard: "معيار التحول الرقمي والابتكار المؤسسي + معيار الابتكار وريادة الأعمال المؤسسية",
+                email: "nada.benali@limu.edu.ly",
+                badge: "التحول الرقمي والابتكار",
+                photo: null
+            },
+            {
+                id: 7,
+                name: "د. هويدا خطاب",
+                role: "مدقق داخلي",
+                standard: "معيار المسؤولية المجتمعية والاستدامة",
+                email: "howaida.khattak@limu.edu.ly",
+                badge: "المسؤولية المجتمعية والاستدامة",
+                photo: null
+            },
+            {
+                id: 8,
+                name: "أ. مصعب البرغثي",
+                role: "مدقق داخلي",
+                standard: "معيار البحث العلمي",
+                email: "mosaab.elbarghathi@limu.edu.ly",
+                badge: "البحث العلمي والابتكار",
+                photo: null
+            },
+            {
+                id: 9,
+                name: "أ. عبد المنعم بوشعالة",
+                role: "مدقق داخلي",
+                standard: "معيار رأس المال البشري + معيار أعضاء هيئة التدريس",
+                email: "abdelmonem.boushala@limu.edu.ly",
+                badge: "رأس المال البشري والكادر الأكاديمي",
+                photo: null
+            },
+            {
+                id: 10,
+                name: "أ. هاجر الحوتي",
+                role: "مدقق داخلي",
+                standard: "معيار الموارد والبنية التحتية",
+                email: "hajar.elhouti@limu.edu.ly",
+                badge: "الموارد والبنية التحتية",
+                photo: null
+            }
+        ];
+
+        let teamData = JSON.parse(JSON.stringify(defaultTeamData));
+        let currentSlideIndex = 0;
+        let viewMode = 'slides';
+
+        // Initialize state from localStorage if custom edits or images exist
+        function initData() {
+            const savedCustomData = localStorage.getItem('limu_team_custom_data');
+            if (savedCustomData) {
+                try {
+                    const parsed = JSON.parse(savedCustomData);
+                    parsed.forEach(savedMember => {
+                        const member = teamData.find(m => m.id === savedMember.id);
+                        if (member) {
+                            member.name = savedMember.name || member.name;
+                            member.role = savedMember.role || member.role;
+                            member.standard = savedMember.standard || member.standard;
+                            member.email = savedMember.email || member.email;
+                            member.badge = savedMember.badge || member.badge;
+                        }
+                    });
+                } catch(e) {
+                    console.error("Error loading saved data", e);
+                }
+            }
+
+            teamData.forEach(member => {
+                const savedPhoto = localStorage.getItem(`limu_member_photo_${member.id}`);
+                if (savedPhoto) {
+                    member.photo = savedPhoto;
+                }
+            });
+        }
+
+        function saveCustomDataToStorage() {
+            const exportData = teamData.map(m => ({
+                id: m.id,
+                name: m.name,
+                role: m.role,
+                standard: m.standard,
+                email: m.email,
+                badge: m.badge
+            }));
+            localStorage.setItem('limu_team_custom_data', JSON.stringify(exportData));
+        }
+
+        // Render Slide View
+        function renderSlide(index) {
+            const member = teamData[index];
+            const container = document.getElementById('slide-container');
+
+            const hasPhoto = member.photo !== null;
+
+            container.innerHTML = `
+                <div class="slide-card rounded-3xl p-6 md:p-10 shadow-2xl glow-effect transition-all duration-300">
+                    
+                    <!-- Top Ribbon Header -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/80 pb-6 mb-8">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-2xl bg-sky-500/20 border border-sky-400/30 text-sky-400 flex items-center justify-center font-black text-lg">
+                                0${member.id}
+                            </span>
+                            <div>
+                                <span class="text-xs uppercase tracking-wider text-sky-400 font-bold block">البطاقة التعريفية للمدقق</span>
+                                <h3 class="text-sm font-semibold text-slate-300">وحدة التدقيق الداخلي - LIMU</h3>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <button onclick="openEditModal(${member.id})" class="no-print inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-600/30 hover:bg-sky-600/50 border border-sky-400/40 text-sky-300 text-xs font-bold transition-all shadow-sm">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <span>تعديل البيانات</span>
+                            </button>
+                            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800 border border-sky-500/40 text-sky-300 text-xs font-bold">
+                                <i class="fa-solid fa-bookmark text-sky-400"></i>
+                                <span>${member.badge}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide Content Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        
+                        <!-- Left/Right Profile Photo Upload Box (5 cols) -->
+                        <div class="lg:col-span-5 flex flex-col items-center justify-center">
+                            <div class="relative group w-64 h-80 md:w-72 md:h-96 rounded-2xl overflow-hidden border-2 border-dashed border-sky-500/50 bg-slate-800/80 flex flex-col items-center justify-center text-center p-4 shadow-xl transition-all hover:border-sky-400">
+                                
+                                ${hasPhoto ? `
+                                    <img src="${member.photo}" alt="${member.name}" class="w-full h-full object-cover rounded-xl">
+                                    <div class="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                                        <button onclick="triggerFileInput(${member.id})" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow flex items-center gap-2">
+                                            <i class="fa-solid fa-arrows-rotate"></i>
+                                            <span>تغيير الصورة</span>
+                                        </button>
+                                        <button onclick="removePhoto(${member.id})" class="bg-red-500/80 hover:bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl shadow flex items-center gap-2">
+                                            <i class="fa-solid fa-trash"></i>
+                                            <span>حذف الصورة</span>
+                                        </button>
+                                    </div>
+                                ` : `
+                                    <div class="space-y-3">
+                                        <div class="w-20 h-20 mx-auto rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 flex items-center justify-center text-3xl">
+                                            <i class="fa-solid fa-user-plus"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-white">إضافة صورة المسؤول</p>
+                                            <p class="text-xs text-slate-400 mt-1">اضغط هنا لرفع صورة رسمية للمدقق</p>
+                                        </div>
+                                        <button onclick="triggerFileInput(${member.id})" class="no-print bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow transition-all inline-flex items-center gap-2">
+                                            <i class="fa-solid fa-upload"></i>
+                                            <span>رفع صورة</span>
+                                        </button>
+                                    </div>
+                                `}
+
+                                <input type="file" id="file-input-${member.id}" class="hidden" accept="image/*" onchange="handleFileUpload(event, ${member.id})">
+                            </div>
+                            <span class="text-xs text-slate-400 mt-3 no-print">
+                                <i class="fa-solid fa-circle-info text-sky-400"></i> يمكنك رفع وصنع بطاقة شخصية مخصصة
+                            </span>
+                        </div>
+
+                        <!-- Info Details (7 cols) -->
+                        <div class="lg:col-span-7 space-y-6">
+                            
+                            <!-- Name & Title -->
+                            <div class="space-y-2">
+                                <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">الاسم والصفة الوظيفية</span>
+                                <h3 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">
+                                    ${member.name}
+                                </h3>
+                                <div class="inline-block px-4 py-1.5 rounded-xl bg-sky-950/80 border border-sky-500/30 text-sky-300 font-bold text-base md:text-lg">
+                                    ${member.role}
+                                </div>
+                            </div>
+
+                            <!-- Standard Responsibility Block -->
+                            <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 space-y-2 shadow-inner">
+                                <div class="flex items-center justify-between text-sky-400 font-bold text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-list-check"></i>
+                                        <span>المعيار المسؤول عنه وفق الجدول المعتمد:</span>
+                                    </div>
+                                    <button onclick="openEditModal(${member.id})" class="no-print text-xs text-slate-400 hover:text-sky-300">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </div>
+                                <p class="text-slate-200 font-bold text-base md:text-lg leading-relaxed bg-slate-800/60 p-3.5 rounded-xl border-r-4 border-sky-500">
+                                    ${member.standard}
+                                </p>
+                            </div>
+
+                            <!-- Contact Email & Quick Actions -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                                <div class="bg-slate-800/60 border border-slate-700 p-4 rounded-xl flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center text-lg flex-shrink-0">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <span class="text-xs text-slate-400 block font-semibold">البريد الإلكتروني الرسمي</span>
+                                        <a href="mailto:${member.email}" class="text-sm font-bold text-sky-300 hover:underline truncate block" dir="ltr">
+                                            ${member.email}
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-800/60 border border-slate-700 p-4 rounded-xl flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center text-lg flex-shrink-0">
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs text-slate-400 block font-semibold">نطاق المراجعة</span>
+                                        <span class="text-sm font-bold text-slate-200">تدقيق داخلي محدد</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Slide Footer Branding -->
+                    <div class="mt-10 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>عضو معتمد بإنشطة التدقيق الداخلي لعام 2026</span>
+                        </div>
+                        <div class="font-semibold text-slate-400">
+                            الجامعة الدولية الليبية للعلوم الطبية - بنغازي
+                        </div>
+                    </div>
+
+                </div>
+            `;
+
+            updateControls();
+            renderDots();
+        }
+
+        // Render Overview Grid Mode
+        function renderGrid() {
+            const container = document.getElementById('grid-view');
+            container.innerHTML = teamData.map(member => `
+                <div class="slide-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-sky-500/50 transition-all">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="relative w-16 h-20 rounded-xl bg-slate-800 border border-slate-700 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                                ${member.photo ? `
+                                    <img src="${member.photo}" class="w-full h-full object-cover">
+                                ` : `
+                                    <i class="fa-solid fa-user text-slate-500 text-xl"></i>
+                                `}
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-extrabold text-sky-400 bg-sky-950 px-2 py-0.5 rounded border border-sky-800">#0${member.id}</span>
+                                <h4 class="text-base font-extrabold text-white mt-1">${member.name}</h4>
+                                <p class="text-xs text-sky-300 font-bold">${member.role}</p>
+                            </div>
+                        </div>
+
+                        <button onclick="openEditModal(${member.id})" class="no-print text-slate-400 hover:text-sky-300 p-1.5 rounded-lg hover:bg-slate-800 transition-colors" title="تعديل البيانات">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
+                        <span class="text-[11px] text-slate-400 font-semibold block">المعيار المسؤول عنه:</span>
+                        <p class="text-xs text-slate-200 font-bold leading-relaxed line-clamp-2">${member.standard}</p>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
+                        <span class="text-slate-400 font-mono text-[11px]" dir="ltr">${member.email}</span>
+                        <button onclick="goToSlide(${member.id - 1})" class="text-sky-400 hover:text-sky-300 font-bold flex items-center gap-1">
+                            <span>عرض الشريحة</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Functions for Editing
+        function openEditModal(memberId) {
+            const member = teamData.find(m => m.id === memberId);
+            if (!member) return;
+
+            document.getElementById('edit-member-id').value = member.id;
+            document.getElementById('edit-name').value = member.name;
+            document.getElementById('edit-role').value = member.role;
+            document.getElementById('edit-standard').value = member.standard;
+            document.getElementById('edit-email').value = member.email;
+            document.getElementById('edit-badge').value = member.badge;
+
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        }
+
+        function saveMemberDetails(e) {
+            e.preventDefault();
+            const id = parseInt(document.getElementById('edit-member-id').value);
+            const member = teamData.find(m => m.id === id);
+
+            if (member) {
+                member.name = document.getElementById('edit-name').value.trim();
+                member.role = document.getElementById('edit-role').value.trim();
+                member.standard = document.getElementById('edit-standard').value.trim();
+                member.email = document.getElementById('edit-email').value.trim();
+                member.badge = document.getElementById('edit-badge').value.trim();
+
+                saveCustomDataToStorage();
+
+                if (viewMode === 'slides') {
+                    renderSlide(currentSlideIndex);
+                } else {
+                    renderGrid();
+                }
+            }
+
+            closeEditModal();
+        }
+
+        function resetToDefaults() {
+            if (confirm("هل أنت تأكد من استعادة البيانات الافتراضية لجميع الأعضاء؟")) {
+                localStorage.removeItem('limu_team_custom_data');
+                teamData = JSON.parse(JSON.stringify(defaultTeamData));
+                
+                // Reapply photos if exist
+                teamData.forEach(member => {
+                    const savedPhoto = localStorage.getItem(`limu_member_photo_${member.id}`);
+                    if (savedPhoto) {
+                        member.photo = savedPhoto;
+                    }
+                });
+
+                if (viewMode === 'slides') {
+                    renderSlide(currentSlideIndex);
+                } else {
+                    renderGrid();
+                }
+            }
+        }
+
+        // Slide Navigation
+        function nextSlide() {
+            if (currentSlideIndex < teamData.length - 1) {
+                currentSlideIndex++;
+                renderSlide(currentSlideIndex);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                renderSlide(currentSlideIndex);
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            setViewMode('slides');
+            renderSlide(currentSlideIndex);
+        }
+
+        function updateControls() {
+            document.getElementById('current-slide-num').innerText = currentSlideIndex + 1;
+            document.getElementById('total-slides-num').innerText = teamData.length;
+            
+            document.getElementById('btn-prev').disabled = currentSlideIndex === 0;
+            document.getElementById('btn-next').disabled = currentSlideIndex === teamData.length - 1;
+        }
+
+        function renderDots() {
+            const dotsContainer = document.getElementById('slide-dots');
+            dotsContainer.innerHTML = teamData.map((_, i) => `
+                <button onclick="goToSlide(${i})" class="w-3 h-3 rounded-full transition-all ${i === currentSlideIndex ? 'bg-sky-400 w-6' : 'bg-slate-700 hover:bg-slate-500'}"></button>
+            `).join('');
+        }
+
+        // View Mode Switcher
+        function setViewMode(mode) {
+            viewMode = mode;
+            const slidesView = document.getElementById('slides-view');
+            const gridView = document.getElementById('grid-view');
+            const btnSlides = document.getElementById('btn-slides');
+            const btnGrid = document.getElementById('btn-grid');
+
+            if (mode === 'slides') {
+                slidesView.classList.remove('hidden');
+                gridView.classList.add('hidden');
+                
+                btnSlides.className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-limu-accent text-white shadow";
+                btnGrid.className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-700/50 transition-all";
+                renderSlide(currentSlideIndex);
+            } else {
+                slidesView.classList.add('hidden');
+                gridView.classList.remove('hidden');
+
+                btnGrid.className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-limu-accent text-white shadow";
+                btnSlides.className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-700/50 transition-all";
+                renderGrid();
+            }
+        }
+
+        // Image Upload Handling
+        function triggerFileInput(memberId) {
+            document.getElementById(`file-input-${memberId}`).click();
+        }
+
+        function handleFileUpload(event, memberId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const member = teamData.find(m => m.id === memberId);
+                    if (member) {
+                        member.photo = e.target.result;
+                        localStorage.setItem(`limu_member_photo_${memberId}`, e.target.result);
+                        if (viewMode === 'slides') {
+                            renderSlide(currentSlideIndex);
+                        } else {
+                            renderGrid();
+                        }
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removePhoto(memberId) {
+            const member = teamData.find(m => m.id === memberId);
+            if (member) {
+                member.photo = null;
+                localStorage.removeItem(`limu_member_photo_${memberId}`);
+                if (viewMode === 'slides') {
+                    renderSlide(currentSlideIndex);
+                } else {
+                    renderGrid();
+                }
+            }
+        }
+
+        // Keyboard Navigation Support
+        document.addEventListener('keydown', (e) => {
+            if (viewMode === 'slides') {
+                if (e.key === 'ArrowLeft') {
+                    nextSlide();
+                } else if (e.key === 'ArrowRight') {
+                    prevSlide();
+                }
+            }
+        });
+
+        // Initialize App
+        initData();
+        renderSlide(0);
+    </script>
+</body>
+</html>
